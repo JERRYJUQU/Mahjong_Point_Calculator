@@ -4,5 +4,12 @@ import java.util.Vector
 
 fun main() {
     val reader = ReadHand()
-    val hand = reader.read()
+    val hand : Vector<Meld>
+    try {
+        reader.read()
+    }
+    catch (e : Exception) {
+        println(e.message)
+        return
+    }
 }

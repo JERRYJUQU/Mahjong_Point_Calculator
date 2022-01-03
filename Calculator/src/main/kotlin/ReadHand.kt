@@ -56,6 +56,18 @@ class ReadHand {
             melds.add(newMeld)
         }
 
+        var numOfCards = 0
+
+        for (meld in melds) {
+            when (meld.type) {
+                "Card" -> numOfCards += 1
+                "Pair" -> numOfCards += 2
+                else -> numOfCards += 3
+            }
+        }
+        if (numOfCards != 14) {
+            throw Exception("INVALID NUMBER OF TILES IN HAND")
+        }
         return melds
     }
 }
