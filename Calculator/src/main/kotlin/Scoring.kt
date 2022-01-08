@@ -13,12 +13,12 @@ class ScoringTypes {
     var nineGates                       = Scoring(88) //九莲宝灯
     var fourKongs                       = Scoring(88) //四杠
     var sevenShiftedPairs               = Scoring(88) //连七对
-    var thirteenOrphans                 = Scoring(88)
+    var thirteenOrphans                 = Scoring(88) //十三幺
 
     //64 points
-    var allTerminals                    = Scoring(64)
-    var littleFourWinds                 = Scoring(64)
-    var littleThreeDragons              = Scoring(64)
+    var allTerminals                    = Scoring(64) //全幺九
+    var littleFourWinds                 = Scoring(64) //小四喜
+    var littleThreeDragons              = Scoring(64) //小三元
     var allHonours                      = Scoring(64)
     var fourConcealedPungs              = Scoring(64)
     var pureTerminalChows               = Scoring(64)
