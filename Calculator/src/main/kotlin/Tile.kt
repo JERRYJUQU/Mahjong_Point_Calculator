@@ -40,4 +40,21 @@ enum class Tile (val value:Int){
     CHARACTER_6(36),
     CHARACTER_7(37),
     CHARACTER_8(38),
+    CHARACTER_9(39);
+
+    private fun findInTile(value : Int) : Tile {
+        for (t in Tile.values()) {
+            if (value == t.value) {
+                return t
+            }
+        }
+        return INVALID
+    }
+
+    operator fun plus(num : Int) : Tile{
+        if (this.value < 11) {
+            return INVALID
+        }
+        return findInTile(this.value + num)
+    }
 }

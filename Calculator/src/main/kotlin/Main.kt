@@ -18,7 +18,18 @@ fun getFullHand(melds : Vector<Meld>) : MutableList<Tile>{
             fullHand.add(m.card + 1)
             fullHand.add(m.card + 2)
         }
+        else if (m.type == "Peng") {
+            fullHand.add(m.card)
+            fullHand.add(m.card)
+            fullHand.add(m.card)
+        }
+        else if (m.type == "Gang") {
+            fullHand.add(m.card)
+            fullHand.add(m.card)
+            fullHand.add(m.card)
+        }
     }
+    return fullHand
 }
 
 fun main() {

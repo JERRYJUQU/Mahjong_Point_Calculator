@@ -8,6 +8,6 @@ class Hand(temp_melds : Vector<Meld>, temp_full_hand : MutableList<Tile>){
     var points = 0
 
     fun bigFourWinds() : Boolean{
-        
+
     }
 }
