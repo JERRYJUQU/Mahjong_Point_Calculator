@@ -14,7 +14,7 @@ class ReadHand {
     }
 
     private fun countHand(hand : Hand) : Boolean {
-        var counter : Int = 0
+        var counter = 0
         for (meld in hand.melds) {
             if (meld.type == "Card") {
                 counter += 1
@@ -58,6 +58,16 @@ class ReadHand {
 
         var numOfCards = 0
 
+        melds.sortedWith(Comparator<Meld>{ a, b ->
+            when {
+                a.card.value > b.card.value -> 1
+                b.card.value > a.card.value -> -1
+                else -> 0
+            }
+        })
+
+
+
         for (meld in melds) {
             when (meld.type) {
                 "Card" -> numOfCards += 1
@@ -68,6 +78,7 @@ class ReadHand {
         if (numOfCards != 14) {
             throw Exception("INVALID NUMBER OF TILES IN HAND")
         }
+
         return melds
     }
 }
