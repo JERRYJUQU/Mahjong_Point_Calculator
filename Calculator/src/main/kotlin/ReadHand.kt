@@ -16,10 +16,10 @@ class ReadHand {
     private fun countHand(hand : Hand) : Boolean {
         var counter = 0
         for (meld in hand.melds) {
-            if (meld.type == "Card") {
+            if (meld.type == MeldType.CARD) {
                 counter += 1
             }
-            else if (meld.type == "Pair") {
+            else if (meld.type == MeldType.PAIR) {
                 counter += 2
             }
             else {
@@ -38,13 +38,21 @@ class ReadHand {
 
         while(true) {
             println("NEXT INPUT(Card, Pair, Chi, Peng, Gang, Quit):")
-            var type:String = reader.next()
-            if (type == "Quit") {
+            var inputType:String = reader.next()
+            if (inputType == "Quit") {
                 break
             }
-            if(type !in listOf("Card", "Pair", "Chi", "Peng", "Gang", "Quit")) {
+            if(inputType !in listOf("Card", "Pair", "Chi", "Peng", "Gang", "Quit")) {
                 println("INVALID INPUT!")
                 continue
+            }
+            var type = MeldType.CARD
+            when (inputType) {
+                "Card" -> type = MeldType.CARD
+                "Pair" -> type = MeldType.PAIR
+                "PENG" -> type = MeldType.PENG
+                "CHI"  -> type = MeldType.CHI
+                "GANG" -> type = MeldType.GANG
             }
             var nextCard:Int = reader.nextInt()
             val result = tileLookUp(nextCard)
@@ -70,8 +78,8 @@ class ReadHand {
 
         for (meld in melds) {
             when (meld.type) {
-                "Card" -> numOfCards += 1
-                "Pair" -> numOfCards += 2
+                MeldType.CARD -> numOfCards += 1
+                MeldType.PAIR -> numOfCards += 2
                 else -> numOfCards += 3
             }
         }
