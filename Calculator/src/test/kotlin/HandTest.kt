@@ -12,6 +12,8 @@ internal class HandTest {
     private val meld3 = Meld(Tile.EAST, MeldType.PAIR)
     private val meld4 = Meld(Tile.EAST, MeldType.CARD)
 
+    private val meld5 = Meld()
+
     private val testHand1 = Vector<Meld>()
     private val testHand2 = Vector<Meld>()
     testHand1.addAll(listOf(Meld()))
