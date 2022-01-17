@@ -7,41 +7,42 @@ class Hand(temp_melds : Vector<Meld>, temp_full_hand : MutableList<Tile>){
     var full_hand = temp_full_hand
     var points = 0
 
-    // private function
-    private fun eastMeld() : Meld{
-        if (Meld(Tile.EAST, MeldType.GANG) in melds) {
-            return Meld(Tile.EAST, MeldType.GANG, false)
+    private fun HasGang(tile : Tile) : Boolean {
+        if (Meld(tile, MeldType.GANG) in melds) {
+            return true
         }
-        else if (Meld(Tile.EAST, MeldType.PENG) in melds) {
-            return Meld(Tile.EAST, MeldType.PENG, false)
+        return false
+    }
+
+    private fun HasPeng(tile : Tile) : Boolean {
+        val predicate : (Meld) -> Boolean = {it == Meld(tile, MeldType.CARD)}
+        if (Meld(tile, MeldType.PENG) in melds) {
+            return true
         }
-        else if (Meld(Tile.EAST, MeldType.PAIR) in melds) {
-            return Meld(Tile.EAST, MeldType.PAIR, false)
+        else if (melds.count(predicate) == 3){
+            return true
         }
-        else {
-            var numOfCard = melds.{vector.iterator() == Meld(Tile.EAST, MeldType.PENG)}
+        return false
+    }
+
+    private fun HasPair(tile : Tile) : Boolean {
+        val predicate : (Meld) -> Boolean = {it == Meld(tile, MeldType.CARD)}
+        if (Meld(tile, MeldType.PAIR) in melds) {
+            return true
         }
-         = 0
-        for (meld in melds) {
-            if (meld.card == Tile.EAST) {
-                when (meld.type){
-                    MeldType.GANG -> return Meld(Tile.EAST, MeldType.GANG)
-                    MeldType.PENG -> return Meld(Tile.EAST, MeldType.PENG)
-                    MeldType.PAIR -> return Meld(Tile.EAST, MeldType.PAIR)
-                    else -> numOfCard++
-                }
-            }
+        else if (melds.count(predicate) == 2){
+            return true
         }
-        when (numOfCard) {
-            4 -> throw FalseHandException()
-            3 -> return Meld(Tile.EAST, MeldType.PENG, false)
-            2 -> return Meld(Tile.EAST, MeldType.PAIR, false)
-            1 -> return Meld(Tile.EAST, MeldType.CARD)
-        }
-        return Meld(Tile.INVALID, MeldType.CARD)
+        return false
     }
 
     fun bigFourWinds() : Boolean{
-
+        if ((HasGang(Tile.EAST) || HasPeng(Tile.EAST)) &&
+            (HasGang(Tile.WEST) || HasPeng(Tile.WEST)) &&
+            (HasGang(Tile.NORTH) || HasPeng(Tile.NORTH)) &&
+            (HasGang(Tile.SOUTH) || HasPeng(Tile.SOUTH))) {
+            return true
+        }
+        return false
     }
 }
