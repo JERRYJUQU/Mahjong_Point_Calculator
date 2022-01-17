@@ -9,27 +9,39 @@ class Hand(temp_melds : Vector<Meld>, temp_full_hand : MutableList<Tile>){
 
     // private function
     private fun eastMeld() : Meld{
-        var numOfCard = 0
+        if (Meld(Tile.EAST, MeldType.GANG) in melds) {
+            return Meld(Tile.EAST, MeldType.GANG, false)
+        }
+        else if (Meld(Tile.EAST, MeldType.PENG) in melds) {
+            return Meld(Tile.EAST, MeldType.PENG, false)
+        }
+        else if (Meld(Tile.EAST, MeldType.PAIR) in melds) {
+            return Meld(Tile.EAST, MeldType.PAIR, false)
+        }
+        else {
+            var numOfCard = melds.{vector.iterator() == Meld(Tile.EAST, MeldType.PENG)}
+        }
+         = 0
         for (meld in melds) {
             if (meld.card == Tile.EAST) {
                 when (meld.type){
-                    "Gang" -> return Meld(Tile.EAST, "Gang")
-                    "Peng" -> return Meld(Tile.EAST, "Peng")
-                    "Pair" -> return Meld(Tile.EAST, "Pair")
+                    MeldType.GANG -> return Meld(Tile.EAST, MeldType.GANG)
+                    MeldType.PENG -> return Meld(Tile.EAST, MeldType.PENG)
+                    MeldType.PAIR -> return Meld(Tile.EAST, MeldType.PAIR)
                     else -> numOfCard++
                 }
             }
         }
         when (numOfCard) {
             4 -> throw FalseHandException()
-            3 -> return Meld(Tile.EAST, "Peng", false)
-            2 -> return Meld(Tile.EAST, "Pair", false)
-            1 -> return Meld(Tile.EAST, "Card")
+            3 -> return Meld(Tile.EAST, MeldType.PENG, false)
+            2 -> return Meld(Tile.EAST, MeldType.PAIR, false)
+            1 -> return Meld(Tile.EAST, MeldType.CARD)
         }
-        return Meld(Tile.INVALID, "Card")
+        return Meld(Tile.INVALID, MeldType.CARD)
     }
 
     fun bigFourWinds() : Boolean{
-        return true
+
     }
 }
