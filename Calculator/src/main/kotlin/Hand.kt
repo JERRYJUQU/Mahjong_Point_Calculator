@@ -6,6 +6,7 @@ class Hand(temp_melds : Vector<Meld>, temp_full_hand : MutableList<Tile>){
     var melds = temp_melds
     var full_hand = temp_full_hand
     var points = 0
+    public var score_book = ScoringTypes()
 
     private fun HasGang(tile : Tile) : Boolean {
         if (Meld(tile, MeldType.GANG) in melds) {
@@ -36,13 +37,23 @@ class Hand(temp_melds : Vector<Meld>, temp_full_hand : MutableList<Tile>){
         return false
     }
 
-    fun bigFourWinds() : Boolean{
+    fun bigFourWinds() : Boolean {
         if ((HasGang(Tile.EAST) || HasPeng(Tile.EAST)) &&
             (HasGang(Tile.WEST) || HasPeng(Tile.WEST)) &&
             (HasGang(Tile.NORTH) || HasPeng(Tile.NORTH)) &&
             (HasGang(Tile.SOUTH) || HasPeng(Tile.SOUTH))) {
+            score_book.littleFourWinds.valid = false
+            score_book.bigThreeWinds.valid = false
+            score_book.allPungs.valid = false
+            score_book.seatWind.valid = false
+            score_book.prevalentWind.valid = false
+            score_book.pungOfTerminalsOrHonours.valid = false
             return true
         }
         return false
+    }
+
+    fun bigThreeDragons() : Boolean {
+
     }
 }
