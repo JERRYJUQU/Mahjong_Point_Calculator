@@ -54,6 +54,34 @@ class Hand(temp_melds : Vector<Meld>, temp_full_hand : MutableList<Tile>){
     }
 
     fun bigThreeDragons() : Boolean {
+        if ((HasGang(Tile.RED) || HasPeng(Tile.RED)) &&
+            (HasGang(Tile.GREEN) || HasPeng(Tile.GREEN)) &&
+            (HasGang(Tile.WHITE) || HasPeng(Tile.WHITE))) {
+            score_book.littleThreeDragons.valid = false
+            score_book.dragonPung.valid = false
+            score_book.twoDragonPungs.valid = false
+            return true
+        }
+        return false
+    }
 
+    fun allGreen() : Boolean {
+        for (meld in melds) {
+            if ((meld.card !in
+                        listOf(Tile.GREEN, Tile.BAMBOO_2, Tile.BAMBOO_3, Tile.BAMBOO_4, Tile.BAMBOO_6, Tile.BAMBOO_8) &&
+                        (meld.type == MeldType.PENG ||
+                                meld.type == MeldType.GANG ||
+                                meld.type == MeldType.PAIR ||
+                                meld.type == MeldType.CARD)) ||
+                (meld.card != Tile.BAMBOO_2 &&
+                        meld.type == MeldType.CHI)) {
+                return false
+            }
+        }
+        return true
+    }
+
+    fun nineGate() : Boolean {
+        for (melds.count())
     }
 }
