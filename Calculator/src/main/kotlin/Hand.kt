@@ -2,9 +2,8 @@ package src.main
 
 import java.util.*
 
-class Hand(temp_melds : Vector<Meld>, temp_full_hand : MutableList<Tile>){
+class Hand(temp_melds : Vector<Meld>){
     var melds = temp_melds
-    var full_hand = temp_full_hand
     var points = 0
     public var score_book = ScoringTypes()
 
@@ -82,6 +81,6 @@ class Hand(temp_melds : Vector<Meld>, temp_full_hand : MutableList<Tile>){
     }
 
     fun nineGate() : Boolean {
-        for (melds.count())
+        if ()
     }
 }

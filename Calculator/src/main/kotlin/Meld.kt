@@ -2,8 +2,7 @@ package src.main
 
 open class Meld(tempCard : Tile, tempType : MeldType, tempConcealed : Boolean = true) {
     var card = tempCard        //value of the meld
-    var type = tempType      //Card/Pair/Chi/Peng/Gang
-    var concealed = tempConcealed
+    var type = tempType      //Chi/Peng/Gang
 
     init {
         if (type == MeldType.CHI &&

@@ -19,9 +19,6 @@ class ReadHand {
             if (meld.type == MeldType.CARD) {
                 counter += 1
             }
-            else if (meld.type == MeldType.PAIR) {
-                counter += 2
-            }
             else {
                 counter += 3
             }
@@ -49,7 +46,6 @@ class ReadHand {
             var type = MeldType.CARD
             when (inputType) {
                 "Card" -> type = MeldType.CARD
-                "Pair" -> type = MeldType.PAIR
                 "PENG" -> type = MeldType.PENG
                 "CHI"  -> type = MeldType.CHI
                 "GANG" -> type = MeldType.GANG
@@ -79,7 +75,6 @@ class ReadHand {
         for (meld in melds) {
             when (meld.type) {
                 MeldType.CARD -> numOfCards += 1
-                MeldType.PAIR -> numOfCards += 2
                 else -> numOfCards += 3
             }
         }

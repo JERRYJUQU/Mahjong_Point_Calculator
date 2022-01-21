@@ -9,7 +9,6 @@ import kotlin.test.assertEquals
 internal class HandTest {
     private val meld1 = Meld(Tile.EAST, MeldType.GANG)
     private val meld2 = Meld(Tile.EAST, MeldType.PENG)
-    private val meld3 = Meld(Tile.EAST, MeldType.PAIR)
     private val meld4 = Meld(Tile.EAST, MeldType.CARD)
 
     private val meld5 = Meld()
