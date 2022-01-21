@@ -7,14 +7,14 @@ class Hand(temp_melds : Vector<Meld>){
     var points = 0
     public var score_book = ScoringTypes()
 
-    private fun HasGang(tile : Tile) : Boolean {
+    private fun hasGang(tile : Tile) : Boolean {
         if (Meld(tile, MeldType.GANG) in melds) {
             return true
         }
         return false
     }
 
-    private fun HasPeng(tile : Tile) : Boolean {
+    private fun hasPeng(tile : Tile) : Boolean {
         val predicate : (Meld) -> Boolean = {it == Meld(tile, MeldType.CARD)}
         if (Meld(tile, MeldType.PENG) in melds) {
             return true
@@ -25,22 +25,19 @@ class Hand(temp_melds : Vector<Meld>){
         return false
     }
 
-    private fun HasPair(tile : Tile) : Boolean {
+    private fun hasPair(tile : Tile) : Boolean {
         val predicate : (Meld) -> Boolean = {it == Meld(tile, MeldType.CARD)}
-        if (Meld(tile, MeldType.PAIR) in melds) {
-            return true
-        }
-        else if (melds.count(predicate) == 2){
+        if (melds.count(predicate) >= 2){
             return true
         }
         return false
     }
 
     fun bigFourWinds() : Boolean {
-        if ((HasGang(Tile.EAST) || HasPeng(Tile.EAST)) &&
-            (HasGang(Tile.WEST) || HasPeng(Tile.WEST)) &&
-            (HasGang(Tile.NORTH) || HasPeng(Tile.NORTH)) &&
-            (HasGang(Tile.SOUTH) || HasPeng(Tile.SOUTH))) {
+        if ((hasGang(Tile.EAST) || hasPeng(Tile.EAST)) &&
+            (hasGang(Tile.WEST) || hasPeng(Tile.WEST)) &&
+            (hasGang(Tile.NORTH) || hasPeng(Tile.NORTH)) &&
+            (hasGang(Tile.SOUTH) || hasPeng(Tile.SOUTH))) {
             score_book.littleFourWinds.valid = false
             score_book.bigThreeWinds.valid = false
             score_book.allPungs.valid = false
@@ -53,9 +50,9 @@ class Hand(temp_melds : Vector<Meld>){
     }
 
     fun bigThreeDragons() : Boolean {
-        if ((HasGang(Tile.RED) || HasPeng(Tile.RED)) &&
-            (HasGang(Tile.GREEN) || HasPeng(Tile.GREEN)) &&
-            (HasGang(Tile.WHITE) || HasPeng(Tile.WHITE))) {
+        if ((hasGang(Tile.RED) || hasPeng(Tile.RED)) &&
+            (hasGang(Tile.GREEN) || hasPeng(Tile.GREEN)) &&
+            (hasGang(Tile.WHITE) || hasPeng(Tile.WHITE))) {
             score_book.littleThreeDragons.valid = false
             score_book.dragonPung.valid = false
             score_book.twoDragonPungs.valid = false
@@ -70,7 +67,6 @@ class Hand(temp_melds : Vector<Meld>){
                         listOf(Tile.GREEN, Tile.BAMBOO_2, Tile.BAMBOO_3, Tile.BAMBOO_4, Tile.BAMBOO_6, Tile.BAMBOO_8) &&
                         (meld.type == MeldType.PENG ||
                                 meld.type == MeldType.GANG ||
-                                meld.type == MeldType.PAIR ||
                                 meld.type == MeldType.CARD)) ||
                 (meld.card != Tile.BAMBOO_2 &&
                         meld.type == MeldType.CHI)) {
@@ -81,6 +77,19 @@ class Hand(temp_melds : Vector<Meld>){
     }
 
     fun nineGate() : Boolean {
-        if ()
+        var temp_meld = melds[1].card.value / 10
+
+        //Check if all the cards are the same type: Bamboo/Dot/Character
+        //Check if all the cards are concealed
+        for (m in melds) {
+            if (m.card.value / 10 != temp_meld || m.card.value < 10 || m.type != MeldType.CARD) {
+                return false
+            }
+        }
+
+        val predicate = {m : Meld, num : Int -> m.card.value % 10 == num}
+        if (melds.count(predicate(1)) == 3)
+
+        return true
     }
 }
