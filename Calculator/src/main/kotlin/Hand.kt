@@ -87,8 +87,11 @@ class Hand(temp_melds : Vector<Meld>){
             }
         }
 
-        val predicate = {m : Meld, num : Int -> m.card.value % 10 == num}
-        if (melds.count(predicate(1)) == 3)
+        if ()
+
+        for (i in 0..13) {
+
+        }
 
         return true
     }
