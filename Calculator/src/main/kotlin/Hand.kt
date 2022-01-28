@@ -87,12 +87,26 @@ class Hand(temp_melds : Vector<Meld>){
             }
         }
 
-        if ()
+        //Check if the first three card are ones and last three cards are nines
+        if (melds[0].card.value % 10 != 1 ||
+                melds[1].card.value % 10 != 1 ||
+                melds[2].card.value % 10 != 1 ||
+                melds[13].card.value % 10 != 9 ||
+                melds[12].card.value % 10 != 9 ||
+                melds[11].card.value % 10 != 9) {
+            return false
+        }
 
-        for (i in 0..13) {
-
+        var temp_count = false
+        for (i in 4..11) {
+            if (melds[i] == melds[i - 1]) {
+                if (temp_count) return false
+                temp_count = true
+            }
         }
 
         return true
     }
+
+    fun
 }
