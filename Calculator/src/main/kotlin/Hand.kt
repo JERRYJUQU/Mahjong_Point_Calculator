@@ -109,5 +109,15 @@ class Hand(temp_melds : Vector<Meld>){
         return true
     }
 
-    fun fourKongs()
+    fun fourKongs() : Boolean {
+        val predicate : (Meld) -> Boolean = {it.type == MeldType.GANG || it.type == MeldType.CGANG}
+        if (melds.count(predicate) == 4) {
+            return true
+        }
+        return false
+    }
+
+    fun sevenShiftedPairs() : Boolean {
+
+    }
 }
