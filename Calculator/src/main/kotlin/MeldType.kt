@@ -4,5 +4,6 @@ enum class MeldType {
     CARD,
     CHI,
     PENG,
-    GANG
+    GANG,
+    CGANG //concealed Gang
 }

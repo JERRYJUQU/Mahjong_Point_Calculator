@@ -8,7 +8,7 @@ class Hand(temp_melds : Vector<Meld>){
     public var score_book = ScoringTypes()
 
     private fun hasGang(tile : Tile) : Boolean {
-        if (Meld(tile, MeldType.GANG) in melds) {
+        if (Meld(tile, MeldType.GANG) in melds || Meld(tile, MeldType.CGANG) in melds) {
             return true
         }
         return false
@@ -67,6 +67,7 @@ class Hand(temp_melds : Vector<Meld>){
                         listOf(Tile.GREEN, Tile.BAMBOO_2, Tile.BAMBOO_3, Tile.BAMBOO_4, Tile.BAMBOO_6, Tile.BAMBOO_8) &&
                         (meld.type == MeldType.PENG ||
                                 meld.type == MeldType.GANG ||
+                                meld.type == MeldType.CGANG ||
                                 meld.type == MeldType.CARD)) ||
                 (meld.card != Tile.BAMBOO_2 &&
                         meld.type == MeldType.CHI)) {
@@ -108,5 +109,5 @@ class Hand(temp_melds : Vector<Meld>){
         return true
     }
 
-    fun
+    fun fourKongs()
 }
