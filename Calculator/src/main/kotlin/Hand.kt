@@ -118,6 +118,13 @@ class Hand(temp_melds : Vector<Meld>){
     }
 
     fun sevenShiftedPairs() : Boolean {
-
+        var i = 0
+        while (i <= 12) {
+            if (melds[i] != melds[i + 1]) {
+                return false
+            }
+            i+=2
+        }
+        return true
     }
 }
