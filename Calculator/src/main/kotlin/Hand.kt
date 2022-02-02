@@ -127,4 +127,25 @@ class Hand(temp_melds : Vector<Meld>){
         }
         return true
     }
+
+    fun thirteenOrphans() : Boolean {
+        var temp_list = ArrayList<Tile>()
+        for (m in melds) {
+            if (m.type != MeldType.CARD || m.card !in listOf(Tile.DOT_1, Tile.DOT_9,
+                    Tile.BAMBOO_1, Tile.BAMBOO_9, Tile.CHARACTER_1, Tile.CHARACTER_9, Tile.EAST,
+                    Tile.WEST, Tile.NORTH, Tile.SOUTH, Tile.GREEN, Tile.RED, Tile.WHITE)) {
+                return false
+            }
+            temp_list.add(m.card)
+        }
+
+        for (t in listOf(Tile.DOT_1, Tile.DOT_9,
+            Tile.BAMBOO_1, Tile.BAMBOO_9, Tile.CHARACTER_1, Tile.CHARACTER_9, Tile.EAST,
+            Tile.WEST, Tile.NORTH, Tile.SOUTH, Tile.GREEN, Tile.RED, Tile.WHITE)) {
+            if (t !in temp_list) {
+                return false
+            }
+        }
+        return true
+    }
 }
