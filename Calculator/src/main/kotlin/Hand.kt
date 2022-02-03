@@ -148,4 +148,13 @@ class Hand(temp_melds : Vector<Meld>){
         }
         return true
     }
+
+    fun allTerminals() : Boolean {
+        for (m in melds) {
+            if (m.card.value < 10 || (m.card.value % 10 != 1 && m.card.value % 10 != 9)) {
+                return false
+            }
+        }
+        return true
+    }
 }
