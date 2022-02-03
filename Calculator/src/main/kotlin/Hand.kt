@@ -157,4 +157,17 @@ class Hand(temp_melds : Vector<Meld>){
         }
         return true
     }
+
+    fun littleFourWinds() : Boolean {
+        for
+    }
+
+    fun allHonours() : Boolean {
+        for (m in melds) {
+            if (m.card !in listOf(Tile.WHITE, Tile.GREEN, Tile.RED, Tile.EAST, Tile.WHITE, Tile.NORTH, Tile.SOUTH)) {
+                return false
+            }
+        }
+        return true
+    }
 }
