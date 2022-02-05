@@ -170,4 +170,10 @@ class Hand(temp_melds : Vector<Meld>){
         }
         return true
     }
+
+    fun fourConcealedPungs() : Boolean {
+        for (i = 0 .. 14) {
+
+        }
+    }
 }
