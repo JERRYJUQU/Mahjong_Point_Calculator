@@ -159,7 +159,7 @@ class Hand(temp_melds : Vector<Meld>){
     }
 
     fun littleFourWinds() : Boolean {
-        for
+
     }
 
     fun allHonours() : Boolean {
@@ -175,5 +175,9 @@ class Hand(temp_melds : Vector<Meld>){
         for (i = 0 .. 14) {
 
         }
+    }
+
+    fun pureTerminalChows() : Boolean {
+        
     }
 }
