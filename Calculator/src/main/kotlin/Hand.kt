@@ -172,12 +172,29 @@ class Hand(temp_melds : Vector<Meld>){
     }
 
     fun fourConcealedPungs() : Boolean {
-        for (i = 0 .. 14) {
-
+        var numOfPungs = 0
+        var curCard = Tile.INVALID
+        var numOfRepeatedCard = 0
+        for (i in 0 .. 14) {
+            if (curCard == melds[i].card) {
+                numOfRepeatedCard ++
+                if (numOfRepeatedCard == 3) {
+                    numOfPungs++
+                }
+            }
+            else {
+                numOfRepeatedCard = 0
+                curCard = melds[i].card
+            }
         }
+
+        if (numOfPungs == 4) {
+            return true
+        }
+        return false
     }
 
     fun pureTerminalChows() : Boolean {
-        
+        var meldNumList = listOf(melds.forEach())
     }
 }
