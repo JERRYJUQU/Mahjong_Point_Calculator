@@ -5,7 +5,7 @@ import java.util.*
 class Hand(temp_melds : Vector<Meld>){
     var melds = temp_melds
     var points = 0
-    public var score_book = ScoringTypes()
+    public var scoreBook = ScoringTypes()
 
     private fun hasGang(tile : Tile) : Boolean {
         if (Meld(tile, MeldType.GANG) in melds || Meld(tile, MeldType.CGANG) in melds) {
@@ -14,7 +14,7 @@ class Hand(temp_melds : Vector<Meld>){
         return false
     }
 
-    private fun hasPeng(tile : Tile) : Boolean {
+    private fun hasPung(tile : Tile) : Boolean {
         val predicate : (Meld) -> Boolean = {it == Meld(tile, MeldType.CARD)}
         if (Meld(tile, MeldType.PENG) in melds) {
             return true
@@ -34,28 +34,28 @@ class Hand(temp_melds : Vector<Meld>){
     }
 
     fun bigFourWinds() : Boolean {
-        if ((hasGang(Tile.EAST) || hasPeng(Tile.EAST)) &&
-            (hasGang(Tile.WEST) || hasPeng(Tile.WEST)) &&
-            (hasGang(Tile.NORTH) || hasPeng(Tile.NORTH)) &&
-            (hasGang(Tile.SOUTH) || hasPeng(Tile.SOUTH))) {
-            score_book.littleFourWinds.valid = false
-            score_book.bigThreeWinds.valid = false
-            score_book.allPungs.valid = false
-            score_book.seatWind.valid = false
-            score_book.prevalentWind.valid = false
-            score_book.pungOfTerminalsOrHonours.valid = false
+        if ((hasGang(Tile.EAST) || hasPung(Tile.EAST)) &&
+            (hasGang(Tile.WEST) || hasPung(Tile.WEST)) &&
+            (hasGang(Tile.NORTH) || hasPung(Tile.NORTH)) &&
+            (hasGang(Tile.SOUTH) || hasPung(Tile.SOUTH))) {
+            scoreBook.littleFourWinds.valid = false
+            scoreBook.bigThreeWinds.valid = false
+            scoreBook.allPungs.valid = false
+            scoreBook.seatWind.valid = false
+            scoreBook.prevalentWind.valid = false
+            scoreBook.pungOfTerminalsOrHonours.valid = false
             return true
         }
         return false
     }
 
     fun bigThreeDragons() : Boolean {
-        if ((hasGang(Tile.RED) || hasPeng(Tile.RED)) &&
-            (hasGang(Tile.GREEN) || hasPeng(Tile.GREEN)) &&
-            (hasGang(Tile.WHITE) || hasPeng(Tile.WHITE))) {
-            score_book.littleThreeDragons.valid = false
-            score_book.dragonPung.valid = false
-            score_book.twoDragonPungs.valid = false
+        if ((hasGang(Tile.RED) || hasPung(Tile.RED)) &&
+            (hasGang(Tile.GREEN) || hasPung(Tile.GREEN)) &&
+            (hasGang(Tile.WHITE) || hasPung(Tile.WHITE))) {
+            scoreBook.littleThreeDragons.valid = false
+            scoreBook.dragonPung.valid = false
+            scoreBook.twoDragonPungs.valid = false
             return true
         }
         return false
@@ -195,6 +195,21 @@ class Hand(temp_melds : Vector<Meld>){
     }
 
     fun pureTerminalChows() : Boolean {
-        var meldNumList = listOf(melds.forEach())
+        var meldNumList = mutableListOf<Int>()
+        var cardType = melds[0].card.value / 10
+        for (i in melds) {
+            if (i.card.value < 11) {
+                return false
+            }
+            if (cardType != i.card.value / 10) {
+                return false
+            }
+            meldNumList.add(i.card.value % 10)
+        }
+
+        if (meldNumList == mutableListOf(1, 1, 2, 2, 3, 3, 5, 5, 7, 7, 8, 8, 9, 9)) {
+            return true
+        }
+        return false
     }
 }
