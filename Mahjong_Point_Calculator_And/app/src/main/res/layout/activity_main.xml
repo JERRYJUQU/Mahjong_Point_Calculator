@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
+    <ImageButton
         android:id="@+id/BAMBOO_1"
         android:layout_width="64dp"
         android:layout_height="64dp"
